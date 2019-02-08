@@ -38,14 +38,24 @@ public class MainActivity extends AppCompatActivity {
     private static String address = "00:18:E4:35:F3:CA";
 
 
-
+    public static Gamespace curworld = new Gamespace();
 
 
     private OGLView oglView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        curworld.newgame();
+
+        for(int ss=0; ss<100; ss++)
+             if(curworld.turn(1)==0)if(curworld.turn(2)==0)if(curworld.turn(3)==0)if(curworld.turn(4)==0)if(curworld.turn(5)==0)curworld.turn(6);
+              curworld.matrix[0][0][0]=1;
+
+
+        curworld.matrix[0][0][0]=curworld.matrix[3][0][0]=curworld.matrix[0][3][0]=curworld.matrix[0][0][3]=curworld.matrix[3][0][3]=curworld.matrix[3][3][0]=curworld.matrix[0][3][3]=curworld.matrix[3][3][3]= 8;
+
         setContentView(R.layout.activity_main);
 
 
@@ -99,6 +109,18 @@ public class MainActivity extends AppCompatActivity {
                                 bytes[3] = readBuf[5];
                                 float f = ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN).getFloat();
                                 oglView.thisrend.setZz(f);
+                            }
+
+                            if (readBuf[1] == (byte) 0xdd && readBuf[6] == (byte) 0xdd) {
+
+                                byte btn_inp = readBuf[2];
+                                //bytes[0] = readBuf[2];
+                               /* for(int i=0; i<6; i++){
+                                    if((btn_inp & 1<<i)>0 &&  (last_btn_inp & 1<<i)==0 )
+                                        curworld.turn(i);
+                                }
+                                last_btn_inp = btn_inp;
+*/
                             }
 
 

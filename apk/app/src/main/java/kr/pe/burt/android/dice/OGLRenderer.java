@@ -24,6 +24,7 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
     private Context context;
     private Cube   cube;
     private   float xx, yy, zz;
+    private  int[] textures = new  int[13];
 
     public float getXx() {
         return xx;
@@ -64,13 +65,32 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
                 ShaderUtils.readShaderFileFromRawResource(context, R.raw.simple_fragment_shader)
         );
 
-        int textureName = TextureUtils.loadTexture(context, R.drawable.dice);
-
+      //  int textureName = TextureUtils.loadTexture(context, R.drawable.dice);
+        texture_init();
         cube = new Cube(shader);
         cube.setPosition(new Float3(0.0f, 0.0f, 0.0f));
-        cube.setTexture(textureName);
+        cube.setTexture(textures[0]);
+      //  cube.setTexture(textureName);
 
        // lastTimeMillis = System.currentTimeMillis();
+    }
+
+
+    private void  texture_init(){
+        textures[0] = TextureUtils.loadTexture(context, R.drawable.nothing);
+        textures[1] = TextureUtils.loadTexture(context, R.drawable.d2);
+        textures[2] = TextureUtils.loadTexture(context, R.drawable.d4);
+        textures[3] = TextureUtils.loadTexture(context, R.drawable.d8);
+        textures[4] = TextureUtils.loadTexture(context, R.drawable.d16);
+        textures[5] = TextureUtils.loadTexture(context, R.drawable.d32);
+        textures[6] = TextureUtils.loadTexture(context, R.drawable.d64);
+        textures[7] = TextureUtils.loadTexture(context, R.drawable.d128);
+        textures[8] = TextureUtils.loadTexture(context, R.drawable.d256);
+        textures[9] = TextureUtils.loadTexture(context, R.drawable.d512);
+        textures[10] = TextureUtils.loadTexture(context, R.drawable.d1024);
+        textures[11] = TextureUtils.loadTexture(context, R.drawable.d2048);
+        textures[12] = TextureUtils.loadTexture(context, R.drawable.error);
+
     }
 
     @Override
@@ -127,8 +147,8 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
         newpos.z = -1.5f;
         //cube.SetTextureMigration(0f, 0.25f, 0f, 0.25f);
         //cube.setupVertexBuffer();
-        int textureName = TextureUtils.loadTexture(context, R.drawable.dice);
-        cube.setTexture(textureName);
+        //int textureName = TextureUtils.loadTexture(context, R.drawable.dice);
+        //cube.setTexture(textureName);
         for(int x1=0; x1<4;x1++){
             //newpos.x = 2.5f;
             //newpos.y=2.5f;
@@ -137,33 +157,61 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
             for(int y1=0; y1<4;y1++){
 
                 for(int z1=0; z1<4;z1++){
+                    int diamond = MainActivity.curworld.matrix[x1][y1][z1];
+                    cube.setPosition(newpos);
+                    if(diamond !=0) {
 
+
+
+
+                        cube.setTexture(textures[diamond]);
+
+
+
+                        cube.draw();
+
+
+                        newpos.x=0;
+                        newpos.y=0;
+                        newpos.z = 2.75f;
+                    }
+                    else{
+                        newpos.z += 2.75f;
+                    }
+                    cube.setScale((float) 1.0);
+
+
+                        //cube.setTexture(textures[12]);
+
+/*
                     cube.setPosition(newpos);
                     cube.draw();
                     cube.setScale((float) 1.0);
+
                     newpos.x=0;
                     newpos.y=0;
                     newpos.z = 2.75f;
+
+
+                    */
                 }
 
-                if((x1+y1)%2==0){
-                    textureName = TextureUtils.loadTexture(context, R.drawable.cock);
-
-                }else  textureName = TextureUtils.loadTexture(context, R.drawable.badman);
-
-                cube.setTexture(textureName);
 
 
 
-                newpos.y = 2.75f;
-                newpos.z = -8.25f;
+
+
+
+                newpos.y += 2.75f;
+                newpos.z += -11f;
+
 
               //  newpos.x=-7.5f;
             }
 
 
-            newpos.y= -8.25f;
-            newpos.x= 2.75f;
+            newpos.y+= -11f;
+            newpos.x+= 2.75f;
 
            // newpos.y=-7.5f;
 
