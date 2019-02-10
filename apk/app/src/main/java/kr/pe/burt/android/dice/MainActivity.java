@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        curworld.matrix= new int[][][]{
+      /*  curworld.matrix= new int[][][]{
                 {
                         {0 ,5,0,0},
                         {5,0,0,0},
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                         {0,0,0,0},
                         {0,0,0,1},}
 
-        };
+        };*/
         setContentView(R.layout.activity_main);
 
 
