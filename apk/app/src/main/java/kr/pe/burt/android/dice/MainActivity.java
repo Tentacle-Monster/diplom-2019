@@ -49,13 +49,38 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         curworld.newgame();
 
-        for(int ss=0; ss<100; ss++)
+      /*  for(int ss=0; ss<100; ss++)
              if(curworld.turn(1)==0)if(curworld.turn(2)==0)if(curworld.turn(3)==0)if(curworld.turn(4)==0)if(curworld.turn(5)==0)curworld.turn(6);
               curworld.matrix[0][0][0]=1;
 
+*/
+  //      curworld.matrix[0][0][0]=curworld.matrix[3][0][0]=curworld.matrix[0][3][0]=curworld.matrix[0][0][3]=curworld.matrix[3][0][3]=curworld.matrix[3][3][0]=curworld.matrix[0][3][3]=curworld.matrix[3][3][3]= 8;
 
-        curworld.matrix[0][0][0]=curworld.matrix[3][0][0]=curworld.matrix[0][3][0]=curworld.matrix[0][0][3]=curworld.matrix[3][0][3]=curworld.matrix[3][3][0]=curworld.matrix[0][3][3]=curworld.matrix[3][3][3]= 8;
 
+
+        curworld.matrix= new int[][][]{
+                {
+                        {0 ,5,0,0},
+                        {5,0,0,0},
+                        {0,0,0,0},
+                        {0,0,0,0},},
+                {
+                        {0,0,0,0},
+                        {0,1,0,0},
+                        {0,0,0,0},
+                        {0,0,0,0},},
+                {
+                        {0,0,0,0},
+                        {0,0,0,0},
+                        {0,0,1,0},
+                        {0,0,0,0},},
+                {
+                        {0,0,0,0},
+                        {0,0,0,0},
+                        {0,0,0,0},
+                        {0,0,0,1},}
+
+        };
         setContentView(R.layout.activity_main);
 
 

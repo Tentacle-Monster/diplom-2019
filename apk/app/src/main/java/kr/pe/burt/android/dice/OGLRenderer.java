@@ -169,6 +169,7 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
 
 
                         cube.draw();
+                        cube.setScale((float) 1.0);
 
 
                         newpos.x=0;
@@ -178,7 +179,6 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
                     else{
                         newpos.z += 2.75f;
                     }
-                    cube.setScale((float) 1.0);
 
 
                         //cube.setTexture(textures[12]);
