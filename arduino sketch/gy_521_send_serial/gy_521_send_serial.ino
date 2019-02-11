@@ -1,41 +1,8 @@
 
-// MPU-6050 Accelerometer + Gyro
-// -----------------------------
-//
-// By arduino.cc user "Krodal".
-// June 2012
-// Open Source / Public Domain
-//
-// Using Arduino 1.0.1
-// It will not work with an older version, 
-// since Wire.endTransmission() uses a parameter 
-// to hold or release the I2C bus.
-//
-// Documentation:
-// - The InvenSense documents:
-//   - "MPU-6000 and MPU-6050 Product Specification",
-//     PS-MPU-6000A.pdf
-//   - "MPU-6000 and MPU-6050 Register Map and Descriptions",
-//     RM-MPU-6000A.pdf or RS-MPU-6000A.pdf
-//   - "MPU-6000/MPU-6050 9-Axis Evaluation Board User Guide"
-//     AN-MPU-6000EVB.pdf
-// 
-// The accuracy is 16-bits.
-//
-// Temperature sensor from -40 to +85 degrees Celsius
-//   340 per degrees, -512 at 35 degrees.
-//
-// At power-up, all registers are zero, except these two:
-//      Register 0x6B (PWR_MGMT_2) = 0x40  (I read zero).
-//      Register 0x75 (WHO_AM_I)   = 0x68.
-// 
 
 #include <Wire.h>
 
 
-// The name of the sensor is "MPU-6050".
-// For program code, I omit the '-', 
-// therefor I use the name "MPU6050....".
 
 
 // Register names according to the datasheet.
@@ -136,12 +103,9 @@
 
 #include <SoftwareSerial.h>
 SoftwareSerial mySerial(6, 5);
-// Defines for the bits, to be able to change 
-// between bit number and binary definition.
-// By using the bit number, programming the sensor 
-// is like programming the AVR microcontroller.
-// But instead of using "(1<<X)", or "_BV(X)", 
-// the Arduino "bit(X)" is used.
+int lastpush;
+char btnpush;
+
 #define MPU6050_D0 0
 #define MPU6050_D1 1
 #define MPU6050_D2 2
@@ -794,6 +758,8 @@ void calibrate_sensors() {
 
 void setup()
 {      
+  lastpush = 0;
+  btnpush=0;
   int error;
   uint8_t c;
     pinMode(8, INPUT);
@@ -1036,17 +1002,25 @@ void loop()
        // mySerial.println("");
         
       //  mySerial.println((char*)pocket);
-
-         char btns = 0xC0;
-         
+         if(lastpush <=0){
+         btnpush = 0xC0;
+          
          for(int i=0; i<6;i++){
-          btns |= digitalRead(i+8)<<i;
+          if(digitalRead(i+8)){
+            lastpush = 10;
+          }
+          
+          btnpush |= digitalRead(i+8)<<i;
+
+
+          
          }
 
-         
+         }
+         lastpush --;
          
          pocket[1]= pocket[6]=0xDD;
-         pocket[2]= pocket[3]=pocket[4]=pocket[5]=btns;
+         pocket[2]= pocket[3]=pocket[4]=pocket[5]=btnpush;
 
          mySerial.println((char*)pocket);
          mySerial.println((char*)pocket);

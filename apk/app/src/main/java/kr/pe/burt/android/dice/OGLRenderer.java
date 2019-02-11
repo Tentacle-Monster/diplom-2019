@@ -120,7 +120,7 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
 
 
         Matrix4f camera2 = new Matrix4f();
-        camera2.translate(0.0f, 0.0f, -7.5f);
+        camera2.translate(0.0f, 0.0f, -10.5f);
 
 
 

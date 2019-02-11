@@ -140,12 +140,12 @@ public class MainActivity extends AppCompatActivity {
 
                                 byte btn_inp = readBuf[2];
                                 //bytes[0] = readBuf[2];
-                               /* for(int i=0; i<6; i++){
+                                for(int i=0; i<6; i++){
                                     if((btn_inp & 1<<i)>0 &&  (last_btn_inp & 1<<i)==0 )
                                         curworld.turn(i);
                                 }
                                 last_btn_inp = btn_inp;
-*/
+
                             }
 
 
