@@ -120,7 +120,7 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
 
 
         Matrix4f camera2 = new Matrix4f();
-        camera2.translate(0.0f, 0.0f, -10.5f);
+        camera2.translate(0.0f, 0.0f, -20.5f);
 
 
 
@@ -139,12 +139,12 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
        // cube.setRotationX(xrot);
        // cube.setRotationY(yrot);
        // cube.setRotationZ(zrot);
-        cube.setScale((float)0.4);
+        cube.setScale((float)1.0);
 
         Float3 newpos = new  Float3(0f, 0f, 0f);
-        newpos.x = -1.5f;
-        newpos.y = -1.5f;
-        newpos.z = -1.5f;
+        newpos.x = -3.5f;
+        newpos.y = -3.5f;
+        newpos.z = -3.5f;
         //cube.SetTextureMigration(0f, 0.25f, 0f, 0.25f);
         //cube.setupVertexBuffer();
         //int textureName = TextureUtils.loadTexture(context, R.drawable.dice);
@@ -170,7 +170,6 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
 
                         cube.draw();
                         cube.setScale((float) 1.0);
-
 
                         newpos.x=0;
                         newpos.y=0;

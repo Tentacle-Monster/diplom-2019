@@ -898,6 +898,9 @@ void loop()
   
   accel_angle_y = 0;
   accel_angle_x = 0;
+ 
+  
+  
   //if(last_gyro_x_angle/accel_angle_x<0)last_gyro_x_angle= 0- last_gyro_x_angle;
   //if(last_gyro_y_angle/accel_angle_y<0)last_gyro_y_angle= 0- last_gyro_y_angle;
   float accel_angle_z = 0;
@@ -920,9 +923,10 @@ void loop()
   float alpha = 0.96;
   float angle_x = alpha*gyro_angle_x + (1.0 - alpha)*accel_angle_x;
   float angle_y = alpha*gyro_angle_y + (1.0 - alpha)*accel_angle_y;
+  
   angle_x = gyro_angle_x;
   angle_y = gyro_angle_y;
-  float angle_z = gyro_angle_z;  //Accelerometer doesn't give z-angle
+  float angle_z = gyro_angle_z;  
     
     
    // gyro_z=    (float)((int)gyro_angle_z*100)/100;
