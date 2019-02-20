@@ -5,6 +5,7 @@ import java.lang.Math;
 
 public class Gamespace {
 
+//адрес: волгоградская 6а 4й этаж
 
         public Boolean modyfied;
         public int rastret = -5;
@@ -111,7 +112,13 @@ public class Gamespace {
     /*    if(modyfied ){
             memcpy(&bufer, &inuse, sizeof(gamespace));
         }
-     */   int ret =0;
+
+
+     */     if(gamemode!=1) newgame();
+
+
+
+            int ret =0;
             int lastret=-1;
             if(dir%2!=0)
                 while (ret-lastret!=0){

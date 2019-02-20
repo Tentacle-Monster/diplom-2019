@@ -158,7 +158,8 @@ public class Model {
                 GLES20.GL_TRIANGLES,        // mode
                 indices.length,             // count
                 GLES20.GL_UNSIGNED_SHORT,   // type
-                0);                         // offset
+                0);
+        // offset
 
         shader.disableVertexAttribute("a_Position");
 //        shader.disableVertexAttribute("a_Color");

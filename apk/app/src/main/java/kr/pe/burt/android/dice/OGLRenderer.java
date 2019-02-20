@@ -14,9 +14,7 @@ import kr.pe.burt.android.dice.glkit.ShaderUtils;
 import kr.pe.burt.android.dice.glkit.TextureUtils;
 
 
-/**
- * Created by burt on 2016. 6. 15..
- */
+
 public class OGLRenderer implements GLSurfaceView.Renderer {
 
    // private static final float ONE_SEC = 1000.0f; // 1 second
@@ -24,7 +22,7 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
     private Context context;
     private Cube   cube;
     private   float xx, yy, zz;
-    private  int[] textures = new  int[13];
+    private  int[] textures = new  int[15];
 
     public float getXx() {
         return xx;
@@ -90,6 +88,8 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
         textures[10] = TextureUtils.loadTexture(context, R.drawable.d1024);
         textures[11] = TextureUtils.loadTexture(context, R.drawable.d2048);
         textures[12] = TextureUtils.loadTexture(context, R.drawable.error);
+        textures[13] = TextureUtils.loadTexture(context, R.drawable.gayower);
+        textures[14] = TextureUtils.loadTexture(context, R.drawable.youwin);
 
     }
 
@@ -135,6 +135,8 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
         camera2.rotate(yrot,0,1,0);
         camera2.rotate(zrot,0,0,1);
 
+        if(MainActivity.curworld.gamemode== 1){
+        camera2.rotate(-90f,0,0,1);
         cube.setCamera(camera2);
        // cube.setRotationX(xrot);
        // cube.setRotationY(yrot);
@@ -277,7 +279,24 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
        /* long currentTimeMillis = System.currentTimeMillis();
         updateWithDelta(currentTimeMillis - lastTimeMillis);
         lastTimeMillis = currentTimeMillis;*/
+    }else {
+            camera2.translate(0.0f, 0.0f, -20.0f);
+
+            cube.setCamera(camera2);
+
+            cube.setTexture(textures[12]);
+            if(MainActivity.curworld.gamemode==2){
+                cube.setTexture(textures[14]);
+            }
+            if(MainActivity.curworld.gamemode==3){
+                cube.setTexture(textures[13]);
+            }
+
+            cube.setScale(10f);
+            cube.draw();
+        }
     }
+
 
     /*public void updateWithDelta(long dt) {
 
