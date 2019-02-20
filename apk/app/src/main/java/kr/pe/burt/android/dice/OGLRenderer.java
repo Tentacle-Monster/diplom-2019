@@ -23,6 +23,7 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
     private Cube   cube;
     private   float xx, yy, zz;
     private  int[] textures = new  int[15];
+    private float notification_rotation=0;
 
     public float getXx() {
         return xx;
@@ -281,9 +282,10 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
         lastTimeMillis = currentTimeMillis;*/
     }else {
             camera2.translate(0.0f, 0.0f, -20.0f);
-
+            camera2.rotate(notification_rotation,0,1,0);
+            camera2.rotate(-90f,0,0,1);
             cube.setCamera(camera2);
-
+            notification_rotation += 0.5;
             cube.setTexture(textures[12]);
             if(MainActivity.curworld.gamemode==2){
                 cube.setTexture(textures[14]);

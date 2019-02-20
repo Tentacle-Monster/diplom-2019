@@ -5,7 +5,6 @@ import java.lang.Math;
 
 public class Gamespace {
 
-//адрес: волгоградская 6а 4й этаж
 
         public Boolean modyfied;
         public int rastret = -5;
@@ -170,7 +169,7 @@ public class Gamespace {
         }
 
         public void newgame(){
-            gamemode = 1;
+            gamemode = 2;
             winner = 0;
             for(int x=0 ;x<matrix.length ; x++){
                 for(int y=0; y<matrix[0].length; y++){

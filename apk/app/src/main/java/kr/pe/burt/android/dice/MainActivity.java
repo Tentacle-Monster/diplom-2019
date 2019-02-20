@@ -89,10 +89,6 @@ public class MainActivity extends AppCompatActivity {
        // requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         oglView = (OGLView) findViewById(R.id.oglView);
-        getWindow().setTitle("fuck you");
-
-
-
         h = new Handler() {
             public void handleMessage(android.os.Message msg) {
                 switch (msg.what) {
