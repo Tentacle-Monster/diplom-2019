@@ -22,7 +22,7 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
     private Context context;
     private Cube   cube;
     private   float xx, yy, zz;
-    private  int[] textures = new  int[15];
+    private  int[] textures = new  int[16];
     private float notification_rotation=0;
 
     public float getXx() {
@@ -91,6 +91,7 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
         textures[12] = TextureUtils.loadTexture(context, R.drawable.error);
         textures[13] = TextureUtils.loadTexture(context, R.drawable.gayower);
         textures[14] = TextureUtils.loadTexture(context, R.drawable.youwin);
+        textures[15] = TextureUtils.loadTexture(context, R.drawable.cube_rebra);
 
     }
 
@@ -125,7 +126,11 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
 
 
 
-       // zz = -160f;
+        Matrix4f cameranox = new Matrix4f();
+        cameranox.translate(0.0f, 0.0f, -20.5f);
+
+
+        // zz = -160f;
        // yy = -160f;
 
         zrot = (float)(zrot * 0.95 + zz*0.05);
@@ -280,11 +285,21 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
        /* long currentTimeMillis = System.currentTimeMillis();
         updateWithDelta(currentTimeMillis - lastTimeMillis);
         lastTimeMillis = currentTimeMillis;*/
+newpos.x -= 5;
+newpos.y +=5;
+newpos.z -=5;
+       cube.setPosition(newpos);
+       cube.setTexture(textures[15]);
+       cube.setScale(10);
+       cube.draw();
+
+
+
     }else {
-            camera2.translate(0.0f, 0.0f, -20.0f);
-            camera2.rotate(notification_rotation,0,1,0);
-            camera2.rotate(-90f,0,0,1);
-            cube.setCamera(camera2);
+            cameranox.translate(0.0f, 0.0f, -20.0f);
+            cameranox.rotate(notification_rotation,0,1,0);
+            cameranox.rotate(-90f,0,0,1);
+            cube.setCamera(cameranox);
             notification_rotation += 0.5;
             cube.setTexture(textures[12]);
             if(MainActivity.curworld.gamemode==2){
