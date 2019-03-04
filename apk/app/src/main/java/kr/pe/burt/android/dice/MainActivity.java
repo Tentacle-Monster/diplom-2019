@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         curworld.newgame();
 
+
       /*  for(int ss=0; ss<100; ss++)
              if(curworld.turn(1)==0)if(curworld.turn(2)==0)if(curworld.turn(3)==0)if(curworld.turn(4)==0)if(curworld.turn(5)==0)curworld.turn(6);
               curworld.matrix[0][0][0]=1;
@@ -83,6 +84,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         };
+
+
+
+
+
         setContentView(R.layout.activity_main);
 
 
@@ -138,12 +144,63 @@ public class MainActivity extends AppCompatActivity {
                             if (readBuf[1] == (byte) 0xdd && readBuf[6] == (byte) 0xdd) {
 
                                 byte btn_inp = readBuf[2];
+
+                                if((btn_inp & 1)>0 && (last_btn_inp & 1)==0)curworld.turn(0);
+                                if((btn_inp & 0b10)>0 && (last_btn_inp & 0b10)==0)curworld.turn(2);
+                                if((btn_inp & 0b100)>0 && (last_btn_inp & 0b100)==0)curworld.turn(4);
+                                if((btn_inp & 0b1000)>0 && (last_btn_inp & 0b1000)==0)curworld.turn(5);
+                                if((btn_inp & 0b10000)>0 && (last_btn_inp & 0b10000)==0)curworld.turn(3);
+                                if((btn_inp & 0b100000)>0 && (last_btn_inp & 0b100000)==0)curworld.turn(1);
+
+                                last_btn_inp = btn_inp;
                                 //bytes[0] = readBuf[2];
+
+
+                         /* int pidr = 0;
+
                                 for(int i=0; i<6; i++){
                                     if((btn_inp & 1<<i)>0 &&  (last_btn_inp & 1<<i)==0 )
-                                        curworld.turn(i);
+
+                                        pidr= i+1;
+
+
+
                                 }
                                 last_btn_inp = btn_inp;
+
+
+
+
+
+
+
+
+                                curworld.matrix=new int[][][]{
+                                        {
+                                                {pidr,pidr,pidr,pidr},
+                                                {pidr,pidr,pidr,pidr},
+                                                {pidr,pidr,pidr,pidr},
+                                                {pidr,pidr,pidr,pidr}
+                                        },
+                                        {
+                                                {pidr,pidr,pidr,pidr},
+                                                {pidr,pidr,pidr,pidr},
+                                                {pidr,pidr,pidr,pidr},
+                                                {pidr,pidr,pidr,pidr}
+                                        },
+                                        {
+                                                {pidr,pidr,pidr,pidr},
+                                                {pidr,pidr,pidr,pidr},
+                                                {pidr,pidr,pidr,pidr},
+                                                {pidr,pidr,pidr,pidr}
+                                        },
+                                        {
+                                                {pidr,pidr,pidr,pidr},
+                                                {pidr,pidr,pidr,pidr},
+                                                {pidr,pidr,pidr,pidr},
+                                                {pidr,pidr,pidr,pidr}
+                                        }
+                                };*/
 
                             }
 

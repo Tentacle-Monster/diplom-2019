@@ -143,11 +143,26 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
 
         if(MainActivity.curworld.gamemode== 1){
         camera2.rotate(-90f,0,0,1);
+
+
+
+
         cube.setCamera(camera2);
-       // cube.setRotationX(xrot);
+
+
+
+
+        // cube.setRotationX(xrot);
        // cube.setRotationY(yrot);
        // cube.setRotationZ(zrot);
-        cube.setScale((float)1.0);
+
+
+
+
+
+
+
+            cube.setScale((float)1.0);
 
         Float3 newpos = new  Float3(0f, 0f, 0f);
         newpos.x = -3.5f;
@@ -285,13 +300,28 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
        /* long currentTimeMillis = System.currentTimeMillis();
         updateWithDelta(currentTimeMillis - lastTimeMillis);
         lastTimeMillis = currentTimeMillis;*/
-newpos.x -= 5;
-newpos.y +=5;
-newpos.z -=5;
-       cube.setPosition(newpos);
-       cube.setTexture(textures[15]);
-       cube.setScale(10);
-       cube.draw();
+GLES20.glDisable(GLES20.GL_DEPTH_TEST);
+
+       newpos.x -=     6.5f;
+newpos.y +=     4.25f;
+newpos.z +=     4.25f;
+
+
+
+            cube.setPosition(newpos);
+//            cube.setPosition(newpos);
+            cube.setTexture(textures[15]);
+            cube.setScale(6f);
+            cube.setRotationX(180f);
+            cube.draw();
+            cube.setScale(1f);
+            cube.setPosition(new Float3(0,0,0));
+            cube.setRotationX(0f);
+            cube.draw();
+
+
+
+
 
 
 
@@ -313,6 +343,14 @@ newpos.z -=5;
             cube.draw();
         }
     }
+
+
+
+    // cube.setScale(1.1f);
+    //cube.draw();
+
+
+
 
 
     /*public void updateWithDelta(long dt) {
