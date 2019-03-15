@@ -768,7 +768,10 @@ void setup()
     pinMode(11, INPUT);
     pinMode(12, INPUT);
     pinMode(13, INPUT);
+    pinMode(6, OUTPUT);
+  digitalWrite(6,HIGH);
   mySerial.begin(9600);
+  
   /*
   mySerial.println(F("InvenSense MPU-6050"));
   mySerial.println(F("June 2012"));
