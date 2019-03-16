@@ -300,9 +300,10 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
        /* long currentTimeMillis = System.currentTimeMillis();
         updateWithDelta(currentTimeMillis - lastTimeMillis);
         lastTimeMillis = currentTimeMillis;*/
-GLES20.glDisable(GLES20.GL_DEPTH_TEST);
+GLES20.glEnable(GLES20.GL_DEPTH_TEST);
+GLES20.glCullFace(GLES20.GL_FRONT);
 
-       newpos.x -=     6.5f;
+       newpos.x -=     6.8f;
 newpos.y +=     4.25f;
 newpos.z +=     4.25f;
 
@@ -317,9 +318,11 @@ newpos.z +=     4.25f;
             cube.setScale(1f);
             cube.setPosition(new Float3(0,0,0));
             cube.setRotationX(0f);
+            GLES20.glCullFace(GLES20.GL_BACK);
+
             cube.draw();
 
-
+            GLES20.glCullFace(GLES20.GL_BACK);
 
 
 
