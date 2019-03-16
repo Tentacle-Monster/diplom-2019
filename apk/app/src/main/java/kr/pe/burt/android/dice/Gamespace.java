@@ -10,19 +10,34 @@ public class Gamespace {
         public int rastret = -5;
         public int gamemode;
         public int score;
-        public int winrate;
+        public final int winrate = 11;
         public int winner;
         public int  matrix[][][] = new int[4][4][4];
         public Boolean turntest(){
             //int lim = maxsize-1;
             int currient;
+           // Boolean answer;
             int rt = 0;
             int tr1 = 1;
-            for(int x=0 ;x<matrix.length ; x++){
+            for(int x=0 ;x<matrix.length; x++){
                 for(int y=0; y<matrix[0].length; y++){
                     for(int z=0; z<matrix[0][0].length; z++){
                         currient = matrix[x][y][z];
-                        if(currient == matrix[x][y][z+1] && z+1<matrix[0][0].length || currient == matrix[x][y+1][z] && y+1<matrix[0].length || currient == matrix[x+1][y][z] && x+1<matrix.length  )return( Boolean.TRUE);
+                       if(z+1<matrix.length)
+                           if(currient == matrix[x][y][z+1])
+                               return true;
+                        if(y+1<matrix.length)
+                            if(currient == matrix[x][y+1][z])
+                                return true;
+                        if(x+1<matrix.length)
+                            if(currient == matrix[x+1][y][z])
+                                return true;
+
+
+
+                     //   if((currient == matrix[x][y][z+1] && z+1<matrix.length) || (currient == matrix[x][y+1][z] && y+1<matrix.length )|| currient == matrix[x+1][y][z] && x+1<matrix.length  )return( Boolean.TRUE);
+
+                      //  if(currient == matrix[x][y][z+1] && z+1<matrix[0][0].length || currient == matrix[x][y+1][z] && y+1<matrix[0].length || currient == matrix[x+1][y][z] && x+1<matrix.length  )return( Boolean.TRUE);
                     }
                 }
             }
@@ -113,7 +128,10 @@ public class Gamespace {
         }
 
 
-     */     if(gamemode!=1) newgame();
+     */     if(gamemode!=1){
+         newgame();
+         return 0;
+            }
 
 
 
@@ -137,40 +155,44 @@ public class Gamespace {
 
                 }
             int space =0 ;
+
             for(int x=0 ;x<matrix.length ; x++){
                 for(int y=0; y<matrix[0].length; y++){
                     for(int z=0; z<matrix[0][0].length; z++){
                         matrix[x][y][z]=Math.abs(matrix[x][y][z]);
-                        if( matrix[x][y][z]>=winrate && winner!=0){
+                        if( matrix[x][y][z]>=winrate){
                             gamemode = 2;
-                            winner = 1;
+                           // winner = 1;
                         }
                         else if(matrix[x][y][z]==0) space++;
                     }
                 }
             }
 
-            modyfied = ret!=0;
+            modyfied = ret !=0;
             if(modyfied){
                 //  memcpy(&back, &bufer, sizeof(gamespace));
 
-                if (space==0 ) gamemode = 3;
-                else
-                    newcube();
+                if (space == 0 ){
+                //   newgame();
+                    gamemode = 3;
+                }
+                else newcube();
             }
-            else{
+          //  turntest();
+           else{
                 if(!turntest() && space==0){
+                 //   newgame();
                     gamemode = 3;
                 }
             }
-
 
             return(ret);
         }
 
         public void newgame(){
             gamemode = 1;
-            winner = 0;
+        //    winner = 0;
             for(int x=0 ;x<matrix.length ; x++){
                 for(int y=0; y<matrix[0].length; y++){
                     for(int z=0; z<matrix[0][0].length; z++){
@@ -220,7 +242,8 @@ public class Gamespace {
                 y = randInt(0,matrix[0].length-1);
                 z = randInt(0,matrix[0][0].length-1);
             }while(matrix[x][y][z]!=0);
-            matrix[x][y][z]=1;
+            if(randInt(0,6)==6) matrix[x][y][z]=2;
+            else    matrix[x][y][z]=1;
 
         }
 

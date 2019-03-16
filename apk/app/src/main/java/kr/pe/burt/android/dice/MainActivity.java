@@ -59,32 +59,46 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        int pidor= 8;
        curworld.matrix= new int[][][]{
                 {
-                        {1,0,0,3},
-                        {0,0,0,0},
-                        {0,0,0,0},
-                        {8,0,0,0},},
+                        {3,5,3,5},
+                        {5,3,5,3},
+                        {3,5,3,5},
+                        {5,3,5,3},
+                },
                 {
-                        {0,0,0,0},
-                        {0,1,3,0},
-                        {0,0,0,0},
-                        {0,0,0,0},},
+                        {5,3,5,3},
+                        {3,5,3,5},
+                        {5,3,5,3},
+                        {3,5,3,5},
+                },
+               /* {
+                        {1,0,0,1},
+                        {0,pidor,pidor,0},
+                        {0,pidor,pidor,0},
+                        {1,0,0,1},},
                 {
-                        {0,0,0,0},
-                        {0,0,0,0},
-                        {0,3,1,0},
-                        {0,0,0,0},},
-                {
-                        {8,0,0,2},
-                        {0,1,3,0},
-                        {0,0,0,0},
-                        {3,0,0,1},}
-
-
+                        {1,1,1,1},
+                        {1,0,0,1},
+                        {1,0,0,1},
+                        {1,1,1,1},}
+*/{
+               {3,5,3,5},
+               {5,3,5,3},
+               {3,5,3,5},
+               {5,3,5,3},
+       },
+               {
+                       {5,3,5,7},
+                       {3,5,3,8},
+                       {5,3,5,9},
+                       {3,5,3,10},
+               }
 
         };
-
+        last_btn_inp= (byte)0b11111111;
+        //curworld.gamemode = 3;
 
 
 
@@ -141,16 +155,16 @@ public class MainActivity extends AppCompatActivity {
                                 oglView.thisrend.setZz(f);
                             }
 
-                            if (readBuf[1] == (byte) 0xdd && readBuf[6] == (byte) 0xdd) {
+                            if (readBuf[1] == (byte) 0xdd && readBuf[6] == (byte) 0xdd && readBuf[2]==readBuf[3]&&readBuf[4]==readBuf[5]&&readBuf[2]==readBuf[5]) {
 
                                 byte btn_inp = readBuf[2];
 
-                                if((btn_inp & 1)>0 && (last_btn_inp & 1)==0)curworld.turn(0);
-                                if((btn_inp & 0b10)>0 && (last_btn_inp & 0b10)==0)curworld.turn(2);
-                                if((btn_inp & 0b100)>0 && (last_btn_inp & 0b100)==0)curworld.turn(4);
-                                if((btn_inp & 0b1000)>0 && (last_btn_inp & 0b1000)==0)curworld.turn(5);
-                                if((btn_inp & 0b10000)>0 && (last_btn_inp & 0b10000)==0)curworld.turn(3);
-                                if((btn_inp & 0b100000)>0 && (last_btn_inp & 0b100000)==0)curworld.turn(1);
+                                if((btn_inp & 0b1)!=0 && (last_btn_inp & 1)==0)curworld.turn(0);
+                                else if((btn_inp & 0b10)!=0 && (last_btn_inp & 0b10)==0)curworld.turn(2);
+                                else if((btn_inp & 0b100)!=0 && (last_btn_inp & 0b100)==0)curworld.turn(4);
+                                else if((btn_inp & 0b1000)!=0 && (last_btn_inp & 0b1000)==0)curworld.turn(5);
+                                else if((btn_inp & 0b10000)!=0 && (last_btn_inp & 0b10000)==0)curworld.turn(3);
+                                else if((btn_inp & 0b100000)!=0 && (last_btn_inp & 0b100000)==0)curworld.turn(1);
 
                                 last_btn_inp = btn_inp;
                                 //bytes[0] = readBuf[2];
@@ -218,8 +232,13 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    //    delayFunction({ myDelayedFunction() }, 300);
 
-
+      /*  curworld.turn(4);
+        curworld.turn(3);
+        curworld.turn(2);
+        curworld.turn(1);
+*/
     }
 
 

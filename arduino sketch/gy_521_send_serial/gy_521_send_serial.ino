@@ -1014,7 +1014,7 @@ void loop()
           
          for(int i=0; i<6;i++){
           if(digitalRead(i+8)){
-            lastpush = 10;
+            lastpush = 5;
           }
           
           btnpush |= digitalRead(i+8)<<i;
