@@ -50,7 +50,6 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
     }
 
     private  float xrot, yrot, zrot;
-    //private long lastTimeMillis = 0L;
 
     public OGLRenderer(Context context) {
         this.context = context;
@@ -64,14 +63,10 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
                 ShaderUtils.readShaderFileFromRawResource(context, R.raw.simple_fragment_shader)
         );
 
-      //  int textureName = TextureUtils.loadTexture(context, R.drawable.dice);
         texture_init();
         cube = new Cube(shader);
         cube.setPosition(new Float3(0.0f, 0.0f, 0.0f));
         cube.setTexture(textures[0]);
-      //  cube.setTexture(textureName);
-
-       // lastTimeMillis = System.currentTimeMillis();
     }
 
 
@@ -89,7 +84,7 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
         textures[10] = TextureUtils.loadTexture(context, R.drawable.d1024);
         textures[11] = TextureUtils.loadTexture(context, R.drawable.d2048);
         textures[12] = TextureUtils.loadTexture(context, R.drawable.error);
-        textures[13] = TextureUtils.loadTexture(context, R.drawable.gayower);
+        textures[13] = TextureUtils.loadTexture(context, R.drawable.gameover);
         textures[14] = TextureUtils.loadTexture(context, R.drawable.youwin);
         textures[15] = TextureUtils.loadTexture(context, R.drawable.cube_rebra);
 
@@ -107,9 +102,6 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
         }
     }
 
-    /**
-     * GLSurfaceView has default 16bit depth buffer
-     */
     @Override
     public void onDrawFrame(GL10 gl10) {
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -124,15 +116,8 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
         Matrix4f camera2 = new Matrix4f();
         camera2.translate(0.0f, 0.0f, -20.5f);
 
-
-
         Matrix4f cameranox = new Matrix4f();
         cameranox.translate(0.0f, 0.0f, -20.5f);
-
-
-        // zz = -160f;
-       // yy = -160f;
-
         zrot = (float)(zrot * 0.95 + zz*0.05);
         yrot = (float)(yrot * 0.95 + yy*0.05);
         xrot = (float)(xrot * 0.95 + xx*0.05);
@@ -143,40 +128,14 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
 
         if(MainActivity.curworld.gamemode== 1){
         camera2.rotate(-90f,0,0,1);
-
-
-
-
         cube.setCamera(camera2);
-
-
-
-
-        // cube.setRotationX(xrot);
-       // cube.setRotationY(yrot);
-       // cube.setRotationZ(zrot);
-
-
-
-
-
-
-
             cube.setScale((float)1.0);
 
         Float3 newpos = new  Float3(0f, 0f, 0f);
         newpos.x = -3.5f;
         newpos.y = -3.5f;
         newpos.z = -3.5f;
-        //cube.SetTextureMigration(0f, 0.25f, 0f, 0.25f);
-        //cube.setupVertexBuffer();
-        //int textureName = TextureUtils.loadTexture(context, R.drawable.dice);
-        //cube.setTexture(textureName);
         for(int x1=0; x1<4;x1++){
-            //newpos.x = 2.5f;
-            //newpos.y=2.5f;
-            //newpos.z=0;
-            //newpos.y = -5f;
             for(int y1=0; y1<4;y1++){
 
                 for(int z1=0; z1<4;z1++){
@@ -201,105 +160,15 @@ public class OGLRenderer implements GLSurfaceView.Renderer {
                     else{
                         newpos.z += 2.75f;
                     }
-
-
-                        //cube.setTexture(textures[12]);
-
-/*
-                    cube.setPosition(newpos);
-                    cube.draw();
-                    cube.setScale((float) 1.0);
-
-                    newpos.x=0;
-                    newpos.y=0;
-                    newpos.z = 2.75f;
-
-
-                    */
                 }
-
-
-
-
-
-
-
                 newpos.y += 2.75f;
                 newpos.z += -11f;
-
-
-              //  newpos.x=-7.5f;
             }
-
-
             newpos.y+= -11f;
             newpos.x+= 2.75f;
 
-           // newpos.y=-7.5f;
-
         }
 
-
-        /*  for(int i=0; i<4;i++) {
-
-            newpos.x = 0.5f;
-            newpos.y =(float) 2.5 * i;
-            newpos.z = 0.0f;
-
-
-            cube.setPosition(newpos);
-
-            cube.draw();
-
-            //cube.setRotationX(0);
-            //cube.setRotationY(0);
-            //cube.setRotationZ(0);
-
-
-            cube.setScale((float) 1.0);
-            newpos.x = 2.5f;
-            //newpos.y = -2.5f;
-            //newpos.z = -2.5f;
-
-            cube.setPosition(newpos);
-            //+cube.setPosition(newpos);
-
-            cube.draw();
-
-            newpos.x = -7.5f;
-            //newpos.y = -7.5f;
-            cube.setPosition(newpos);
-            cube.draw();
-
-            newpos.x = 2.5f;
-            //newpos.y = -2.5f;
-            //newpos.z = -2.5f;
-            cube.setPosition(newpos);
-            cube.draw();
-        }
-
-/*
-        newpos.x = 2.5f;
-        //newpos.y = 7.5f;
-        //newpos.z = 7.5f;
-        cube.setPosition(newpos);
-        cube.draw();
-
-        newpos.x = 2.5f;
-        //newpos.y = 0f;
-        //newpos.z = 2.5f;
-        cube.setPosition(newpos);
-        cube.draw();
-
-        newpos.x = 2.5f;
-        //newpos.y = 2.5f;
-        //newpos.z = 0f;
-        cube.setPosition(newpos);
-        cube.draw();
-*/
-       /* long currentTimeMillis = System.currentTimeMillis();
-        updateWithDelta(currentTimeMillis - lastTimeMillis);
-        lastTimeMillis = currentTimeMillis;*/
 GLES20.glEnable(GLES20.GL_DEPTH_TEST);
 GLES20.glCullFace(GLES20.GL_FRONT);
 
@@ -313,11 +182,11 @@ newpos.z +=     4.25f;
 //            cube.setPosition(newpos);
             cube.setTexture(textures[15]);
             cube.setScale(6f);
-            cube.setRotationX(180f);
+       //     cube.setRotationX(180f);
             cube.draw();
             cube.setScale(1f);
             cube.setPosition(new Float3(0,0,0));
-            cube.setRotationX(0f);
+         //   cube.setRotationX(0f);
             GLES20.glCullFace(GLES20.GL_BACK);
 
             cube.draw();

@@ -9,9 +9,6 @@ import java.nio.IntBuffer;
 import java.nio.LongBuffer;
 import java.nio.ShortBuffer;
 
-/**
- * Created by burt on 2016. 5. 11..
- */
 public class BufferUtils {
 
     public static FloatBuffer newFloatBuffer (int numFloats) {

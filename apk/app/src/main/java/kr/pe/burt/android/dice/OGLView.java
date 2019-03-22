@@ -4,9 +4,7 @@ import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 
-/**
- * Created by burt on 2016. 6. 15..
- */
+
 public class OGLView extends GLSurfaceView {
 
     public OGLView(Context context) {

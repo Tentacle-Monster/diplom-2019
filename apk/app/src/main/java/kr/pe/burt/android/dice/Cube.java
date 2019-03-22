@@ -2,9 +2,6 @@ package kr.pe.burt.android.dice;
 
 import kr.pe.burt.android.dice.glkit.ShaderProgram;
 
-/**
- * Created by burt on 2016. 6. 23..
- */
 public class Cube extends Model {
 
     static float vertices[] = {
@@ -73,22 +70,6 @@ public class Cube extends Model {
             22, 23, 20
     };
 
-/*
-    public void SetTextureMigration( float xmin, float xmax, float ymin, float ymax){
-        for( int i=0; i<6; i++){
-            int slice = i*36;
-            vertices[slice + 7] = vertices[slice + 9+7] = xmax;
-            vertices[slice + 18+ 7] = vertices[slice + 27 +7] = xmin;
-            vertices[slice + 8] = vertices[slice + 27+8] = ymin;
-            vertices[slice + 9+8] = vertices[slice + 18+ 8] = ymax;
-        }
-       // super("cube", shader, vertices, indices);
-        //Cube(shader);
-       // setupVertexBuffer();
-      //  setupIndexBuffer();
-    }
-
-*/
     public Cube(ShaderProgram shader) {
         super("cube", shader, vertices, indices);
     }

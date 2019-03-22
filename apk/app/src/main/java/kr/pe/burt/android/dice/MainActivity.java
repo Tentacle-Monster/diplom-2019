@@ -1,10 +1,14 @@
 package kr.pe.burt.android.dice;
 
+import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
@@ -48,65 +52,8 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         curworld.newgame();
-
-
-      /*  for(int ss=0; ss<100; ss++)
-             if(curworld.turn(1)==0)if(curworld.turn(2)==0)if(curworld.turn(3)==0)if(curworld.turn(4)==0)if(curworld.turn(5)==0)curworld.turn(6);
-              curworld.matrix[0][0][0]=1;
-
-*/
-  //      curworld.matrix[0][0][0]=curworld.matrix[3][0][0]=curworld.matrix[0][3][0]=curworld.matrix[0][0][3]=curworld.matrix[3][0][3]=curworld.matrix[3][3][0]=curworld.matrix[0][3][3]=curworld.matrix[3][3][3]= 8;
-
-
-
-        int pidor= 8;
-       curworld.matrix= new int[][][]{
-                {
-                        {3,5,3,5},
-                        {5,3,5,3},
-                        {3,5,3,5},
-                        {5,3,5,3},
-                },
-                {
-                        {5,3,5,3},
-                        {3,5,3,5},
-                        {5,3,5,3},
-                        {3,5,3,5},
-                },
-               /* {
-                        {1,0,0,1},
-                        {0,pidor,pidor,0},
-                        {0,pidor,pidor,0},
-                        {1,0,0,1},},
-                {
-                        {1,1,1,1},
-                        {1,0,0,1},
-                        {1,0,0,1},
-                        {1,1,1,1},}
-*/{
-               {3,5,3,5},
-               {5,3,5,3},
-               {3,5,3,5},
-               {5,3,5,3},
-       },
-               {
-                       {5,3,5,7},
-                       {3,5,3,8},
-                       {5,3,5,9},
-                       {3,5,3,10},
-               }
-
-        };
         last_btn_inp= (byte)0b11111111;
-        //curworld.gamemode = 3;
-
-
-
-
         setContentView(R.layout.activity_main);
-
-
-       // requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         oglView = (OGLView) findViewById(R.id.oglView);
         h = new Handler() {
@@ -116,14 +63,8 @@ public class MainActivity extends AppCompatActivity {
                         // если приняли сообщение в Handler
                         byte[] readBuf = (byte[]) msg.obj;
                         //packet= concat(readBuf1 , readBuf);
-
-
-
                         if(readBuf[0]==(byte)0xff&&readBuf[7]==(byte)0xff) {
-
-
                             if (readBuf[1] == (byte) 0xaa && readBuf[6] == (byte) 0xaa) {
-
                                 byte[] bytes = new byte[4];
                                 bytes[0] = readBuf[2];
                                 bytes[1] = readBuf[3];
@@ -132,9 +73,7 @@ public class MainActivity extends AppCompatActivity {
                                 float f = ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN).getFloat();
                                 oglView.thisrend.setXx(f);
                             }
-
                             if (readBuf[1] == (byte) 0xbb && readBuf[6] == (byte) 0xbb) {
-
                                 byte[] bytes = new byte[4];
                                 bytes[0] = readBuf[2];
                                 bytes[1] = readBuf[3];
@@ -143,9 +82,7 @@ public class MainActivity extends AppCompatActivity {
                                 float f = ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN).getFloat();
                                 oglView.thisrend.setYy(f);
                             }
-
                             if (readBuf[1] == (byte) 0xcc && readBuf[6] == (byte) 0xcc) {
-
                                 byte[] bytes = new byte[4];
                                 bytes[0] = readBuf[2];
                                 bytes[1] = readBuf[3];
@@ -154,71 +91,16 @@ public class MainActivity extends AppCompatActivity {
                                 float f = ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN).getFloat();
                                 oglView.thisrend.setZz(f);
                             }
-
                             if (readBuf[1] == (byte) 0xdd && readBuf[6] == (byte) 0xdd && readBuf[2]==readBuf[3]&&readBuf[4]==readBuf[5]&&readBuf[2]==readBuf[5]) {
-
                                 byte btn_inp = readBuf[2];
-
                                 if((btn_inp & 0b1)!=0 && (last_btn_inp & 1)==0)curworld.turn(0);
                                 else if((btn_inp & 0b10)!=0 && (last_btn_inp & 0b10)==0)curworld.turn(2);
                                 else if((btn_inp & 0b100)!=0 && (last_btn_inp & 0b100)==0)curworld.turn(4);
                                 else if((btn_inp & 0b1000)!=0 && (last_btn_inp & 0b1000)==0)curworld.turn(5);
                                 else if((btn_inp & 0b10000)!=0 && (last_btn_inp & 0b10000)==0)curworld.turn(3);
                                 else if((btn_inp & 0b100000)!=0 && (last_btn_inp & 0b100000)==0)curworld.turn(1);
-
                                 last_btn_inp = btn_inp;
-                                //bytes[0] = readBuf[2];
-
-
-                         /* int pidr = 0;
-
-                                for(int i=0; i<6; i++){
-                                    if((btn_inp & 1<<i)>0 &&  (last_btn_inp & 1<<i)==0 )
-
-                                        pidr= i+1;
-
-
-
-                                }
-                                last_btn_inp = btn_inp;
-
-
-
-
-
-
-
-
-                                curworld.matrix=new int[][][]{
-                                        {
-                                                {pidr,pidr,pidr,pidr},
-                                                {pidr,pidr,pidr,pidr},
-                                                {pidr,pidr,pidr,pidr},
-                                                {pidr,pidr,pidr,pidr}
-                                        },
-                                        {
-                                                {pidr,pidr,pidr,pidr},
-                                                {pidr,pidr,pidr,pidr},
-                                                {pidr,pidr,pidr,pidr},
-                                                {pidr,pidr,pidr,pidr}
-                                        },
-                                        {
-                                                {pidr,pidr,pidr,pidr},
-                                                {pidr,pidr,pidr,pidr},
-                                                {pidr,pidr,pidr,pidr},
-                                                {pidr,pidr,pidr,pidr}
-                                        },
-                                        {
-                                                {pidr,pidr,pidr,pidr},
-                                                {pidr,pidr,pidr,pidr},
-                                                {pidr,pidr,pidr,pidr},
-                                                {pidr,pidr,pidr,pidr}
-                                        }
-                                };*/
-
                             }
-
-
                         }
                         break;
                 }

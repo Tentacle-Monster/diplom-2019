@@ -32,13 +32,7 @@ public class Gamespace {
                         if(x+1<matrix.length)
                             if(currient == matrix[x+1][y][z])
                                 return true;
-
-
-
-                     //   if((currient == matrix[x][y][z+1] && z+1<matrix.length) || (currient == matrix[x][y+1][z] && y+1<matrix.length )|| currient == matrix[x+1][y][z] && x+1<matrix.length  )return( Boolean.TRUE);
-
-                      //  if(currient == matrix[x][y][z+1] && z+1<matrix[0][0].length || currient == matrix[x][y+1][z] && y+1<matrix[0].length || currient == matrix[x+1][y][z] && x+1<matrix.length  )return( Boolean.TRUE);
-                    }
+      }
                 }
             }
             return (Boolean.FALSE);
@@ -123,19 +117,11 @@ public class Gamespace {
 
 
         public int turn(int dir){
-    /*    if(modyfied ){
-            memcpy(&bufer, &inuse, sizeof(gamespace));
-        }
-
-
-     */     if(gamemode!=1){
+      if(gamemode!=1){
          newgame();
          return 0;
             }
-
-
-
-            int ret =0;
+          int ret =0;
             int lastret=-1;
             if(dir%2!=0)
                 while (ret-lastret!=0){
@@ -162,7 +148,6 @@ public class Gamespace {
                         matrix[x][y][z]=Math.abs(matrix[x][y][z]);
                         if( matrix[x][y][z]>=winrate){
                             gamemode = 2;
-                           // winner = 1;
                         }
                         else if(matrix[x][y][z]==0) space++;
                     }
@@ -171,18 +156,13 @@ public class Gamespace {
 
             modyfied = ret !=0;
             if(modyfied){
-                //  memcpy(&back, &bufer, sizeof(gamespace));
-
                 if (space == 0 ){
-                //   newgame();
                     gamemode = 3;
                 }
                 else newcube();
             }
-          //  turntest();
            else{
                 if(!turntest() && space==0){
-                 //   newgame();
                     gamemode = 3;
                 }
             }
@@ -202,16 +182,8 @@ public class Gamespace {
             }
             newcube();
             newcube();
-            //rotate_x=0;
-            //rotate_y=0;
             score = 0;
-            //memcpy(&back, &inuse,sizeof(gamespace));
-            //memcpy(&bufer, &inuse,sizeof(gamespace));
-            //mise_x = 0;
-            //mise_y = 0;
             modyfied=Boolean.TRUE;
-            //radius = 2;
-
         }
 
         public static int randInt(int min, int max) {

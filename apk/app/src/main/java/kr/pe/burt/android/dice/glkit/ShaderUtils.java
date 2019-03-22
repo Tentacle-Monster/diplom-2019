@@ -9,9 +9,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
-/**
- * Created by burt on 2016. 6. 15..
- */
 public class ShaderUtils {
 
     public static String readShaderFileFromRawResource(final Context context, final int resourceId)

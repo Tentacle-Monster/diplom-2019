@@ -12,10 +12,6 @@ import java.util.Arrays;
 import kr.pe.burt.android.dice.glkit.BufferUtils;
 import kr.pe.burt.android.dice.glkit.ShaderProgram;
 
-
-/**
- * Created by burt on 2016. 6. 22..
- */
 public class Model {
     private static final int COORDS_PER_VERTEX = 3;
     private static final int COLORS_PER_VERTEX = 4;

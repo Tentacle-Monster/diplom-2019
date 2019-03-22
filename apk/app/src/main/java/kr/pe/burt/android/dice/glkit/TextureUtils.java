@@ -6,10 +6,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.opengl.GLES20;
 import android.opengl.GLUtils;
-
-/**
- * Created by burt on 2016. 6. 24..
- */
 public class TextureUtils {
 
     public static int loadTexture(Context context, int drawableID) {
